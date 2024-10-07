@@ -16,8 +16,8 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 
 SERVICE_ACCOUNT_FILE = './service_account.json'
-GOOGLE_DRIVE_FOLDER_PDF_ID = '1E5BIkwG7thVKwkp9Y8Uu8pIvDlZupB5V'
-GOOGLE_DRIVE_FOLDER_CSV_ID = '1aLuf8TYB5Oym3zW86w1lcEP4T0J0L2_H'
+GOOGLE_DRIVE_FOLDER_PDF_ID = os.getenv('GOOGLE_DRIVE_FOLDER_PDF_ID')
+GOOGLE_DRIVE_FOLDER_CSV_ID = os.getenv('GOOGLE_DRIVE_FOLDER_CSV_ID')
 
 def authenticate_drive():
     gauth = GoogleAuth()
