@@ -16,7 +16,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.8'
+        python-version: '3.11.7'
 
     - name: Install AWS SAM CLI
       run: |
@@ -27,13 +27,21 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1
+        aws-region: us-east-1  # Cambia a tu región
 
-    - name: Install dependencies
+    - name: Crear archivo service_account.json
       run: |
-        pip install -r requirements.txt
+        echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}" > src/service_account.json
+
+    - name: Configurar variables de entorno para Lambda
+      run: |
+        echo "GOOGLE_DRIVE_FOLDER_PDF_ID=${{ secrets.GOOGLE_DRIVE_FOLDER_PDF_ID }}" >> $GITHUB_ENV
+        echo "GOOGLE_DRIVE_FOLDER_CSV_ID=${{ secrets.GOOGLE_DRIVE_FOLDER_CSV_ID }}" >> $GITHUB_ENV
 
     - name: Build and Deploy with AWS SAM
       run: |
         sam build
-        sam deploy --no-confirm-changeset --stack-name ScrapyLambdaStack --capabilities CAPABILITY_IAM
+        sam deploy --no-confirm-changeset --stack-name ScrapyLambdaStack --capabilities CAPABILITY_IAM \
+          --parameter-overrides \
+          GOOGLE_DRIVE_FOLDER_PDF_ID=${{ secrets.GOOGLE_DRIVE_FOLDER_PDF_ID }} \
+          GOOGLE_DRIVE_FOLDER_CSV_ID=${{ secrets.GOOGLE_DRIVE_FOLDER_CSV_ID }}
