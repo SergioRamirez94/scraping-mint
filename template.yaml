@@ -8,10 +8,21 @@ Resources:
       Handler: src/lambda_function.lambda_handler
       Runtime: python3.11
       CodeUri: src/
+      CodeUri: src/
       MemorySize: 512
       Timeout: 300
       Environment:
         Variables:
           GOOGLE_APPLICATION_CREDENTIALS: "/var/task/src/service_account.json"
+          GOOGLE_DRIVE_FOLDER_PDF_ID: !Ref GoogleDriveFolderPdfId
+          GOOGLE_DRIVE_FOLDER_CSV_ID: !Ref GoogleDriveFolderCsvId
       Policies:
         - AWSLambdaBasicExecutionRole
+
+Parameters:
+  GoogleDriveFolderPdfId:
+    Type: String
+    Description: "ID de la carpeta de Google Drive para PDF"
+  GoogleDriveFolderCsvId:
+    Type: String
+    Description: "ID de la carpeta de Google Drive para CSV"

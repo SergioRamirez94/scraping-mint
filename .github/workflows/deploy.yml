@@ -47,5 +47,5 @@ jobs:
         sam build
         sam deploy --no-confirm-changeset --stack-name ScrapyLambdaStack --capabilities CAPABILITY_IAM \
           --parameter-overrides \
-          GOOGLE_DRIVE_FOLDER_PDF_ID=${{ secrets.GOOGLE_DRIVE_FOLDER_PDF_ID }} \
-          GOOGLE_DRIVE_FOLDER_CSV_ID=${{ secrets.GOOGLE_DRIVE_FOLDER_CSV_ID }}
+          GoogleDriveFolderPdfId=${{ secrets.GOOGLE_DRIVE_FOLDER_PDF_ID }} \
+          GoogleDriveFolderCsvId=${{ secrets.GOOGLE_DRIVE_FOLDER_CSV_ID }}
