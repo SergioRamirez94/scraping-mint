@@ -3,7 +3,7 @@ name: Deploy to AWS Lambda
 on:
   push:
     branches:
-      - staging
+      - main
 
 jobs:
   deploy:
@@ -11,32 +11,36 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3  # Actualizado a v3
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4  # Actualizado a v4
       with:
-        python-version: '3.11.7'
+        python-version: '3.11'
 
     - name: Install AWS SAM CLI
       run: |
         pip install aws-sam-cli
 
     - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
+      uses: aws-actions/configure-aws-credentials@v2  # Actualizado a v2
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1  # Cambia a tu región
+        aws-region: us-east-2  # Cambia a tu región
 
     - name: Crear archivo service_account.json
       run: |
         echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}" > src/service_account.json
 
-    - name: Configurar variables de entorno para Lambda
+    - name: Configurar variables de entorno adicionales
       run: |
         echo "GOOGLE_DRIVE_FOLDER_PDF_ID=${{ secrets.GOOGLE_DRIVE_FOLDER_PDF_ID }}" >> $GITHUB_ENV
         echo "GOOGLE_DRIVE_FOLDER_CSV_ID=${{ secrets.GOOGLE_DRIVE_FOLDER_CSV_ID }}" >> $GITHUB_ENV
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
 
     - name: Build and Deploy with AWS SAM
       run: |
