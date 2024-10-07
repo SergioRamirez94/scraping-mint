@@ -8,7 +8,6 @@ Resources:
       Handler: src/lambda_function.lambda_handler
       Runtime: python3.11
       CodeUri: src/
-      CodeUri: src/
       MemorySize: 512
       Timeout: 300
       Environment:
