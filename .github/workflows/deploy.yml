@@ -44,7 +44,7 @@ jobs:
 
     - name: Build and Deploy with AWS SAM
       run: |
-        sam build
+        sam build --clean
         sam deploy --no-confirm-changeset --stack-name ScrapyLambdaStack --capabilities CAPABILITY_NAMED_IAM \
           --s3-bucket deploy-scrapy-mint \
           --parameter-overrides \
