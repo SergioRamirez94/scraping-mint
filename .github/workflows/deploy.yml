@@ -11,10 +11,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3  # Actualizado a v3
+      uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v4  # Actualizado a v4
+      uses: actions/setup-python@v4
       with:
         python-version: '3.11'
 
@@ -23,7 +23,7 @@ jobs:
         pip install aws-sam-cli
 
     - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v2  # Actualizado a v2
+      uses: aws-actions/configure-aws-credentials@v2
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
