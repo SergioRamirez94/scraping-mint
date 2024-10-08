@@ -10,7 +10,7 @@ Resources:
       Handler: lambda_function.lambda_handler
       Runtime: python3.11
       CodeUri: src/
-      MemorySize: 512
+      MemorySize: 1024
       Timeout: 300
       Role: arn:aws:iam::905418333881:role/ScrapyLambdaFunctionRole
       Environment:

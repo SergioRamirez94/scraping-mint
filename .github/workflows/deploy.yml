@@ -18,10 +18,6 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: Install AWS SAM CLI
-      run: |
-        pip install aws-sam-cli
-
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v2
       with:
@@ -44,7 +40,7 @@ jobs:
 
     - name: Build and Deploy with AWS SAM
       run: |
-        sam build
+        sam build --use-container
         sam deploy --no-confirm-changeset --stack-name ScrapyLambdaStack --capabilities CAPABILITY_NAMED_IAM \
           --s3-bucket deploy-scrapy-mint \
           --parameter-overrides \
