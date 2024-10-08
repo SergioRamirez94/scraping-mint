@@ -4,6 +4,6 @@ oauth2client==4.1.3
 pandas
 pdfplumber==0.11.4
 PyDrive2==1.20.0
-Scrapy==2.11.1
+scrapy
 scrapy-user-agents
 requests
