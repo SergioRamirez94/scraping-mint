@@ -34,9 +34,6 @@ jobs:
         echo "GOOGLE_DRIVE_FOLDER_PDF_ID=${{ secrets.GOOGLE_DRIVE_FOLDER_PDF_ID }}" >> $GITHUB_ENV
         echo "GOOGLE_DRIVE_FOLDER_CSV_ID=${{ secrets.GOOGLE_DRIVE_FOLDER_CSV_ID }}" >> $GITHUB_ENV
 
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
 
     - name: Build and Deploy with AWS SAM
       run: |
