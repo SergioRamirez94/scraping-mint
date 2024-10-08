@@ -13,6 +13,8 @@ Resources:
       MemorySize: 1024
       Timeout: 300
       Role: arn:aws:iam::905418333881:role/ScrapyLambdaFunctionRole
+      Layers:
+        - arn:aws:lambda:us-east-2:905418333881:layer:ScrapyLayer:1
       Environment:
         Variables:
           GOOGLE_APPLICATION_CREDENTIALS: "/var/task/src/service_account.json"
