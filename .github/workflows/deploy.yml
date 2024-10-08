@@ -45,8 +45,8 @@ jobs:
     - name: Build and Deploy with AWS SAM
       run: |
         sam build
-        sam deploy --no-confirm-changeset --stack-name ScrapyLambdaStack --capabilities CAPABILITY_IAM \
-          --s3-bucket deploy-scrapy-mint \
+        sam deploy --no-confirm-changeset --stack-name ScrapyLambdaStack --capabilities CAPABILITY_NAMED_IAM \
+          --s3-bucket nombre-del-bucket \
           --parameter-overrides \
           GoogleDriveFolderPdfId=${{ secrets.GOOGLE_DRIVE_FOLDER_PDF_ID }} \
           GoogleDriveFolderCsvId=${{ secrets.GOOGLE_DRIVE_FOLDER_CSV_ID }}
