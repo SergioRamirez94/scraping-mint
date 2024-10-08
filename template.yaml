@@ -12,7 +12,7 @@ Resources:
       CodeUri: src/
       MemorySize: 512
       Timeout: 300
-      Role: !GetAtt ScrapyLambdaFunctionRole.Arn
+      Role: arn:aws:iam::905418333881:role/ScrapyLambdaFunctionRole
       Environment:
         Variables:
           GOOGLE_APPLICATION_CREDENTIALS: "/var/task/src/service_account.json"
