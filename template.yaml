@@ -7,7 +7,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: "ScrapyMint"
-      Handler: src/lambda_function.lambda_handler
+      Handler: lambda_function.lambda_handler
       Runtime: python3.11
       CodeUri: src/
       MemorySize: 512
