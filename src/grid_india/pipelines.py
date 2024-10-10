@@ -19,6 +19,7 @@ SERVICE_ACCOUNT_FILE = './service_account.json'
 GOOGLE_DRIVE_FOLDER_PDF_ID = os.getenv('GOOGLE_DRIVE_FOLDER_PDF_ID')
 GOOGLE_DRIVE_FOLDER_CSV_ID = os.getenv('GOOGLE_DRIVE_FOLDER_CSV_ID')
 
+
 def authenticate_drive():
     gauth = GoogleAuth()
     scope = ['https://www.googleapis.com/auth/drive']
@@ -69,14 +70,14 @@ class ProcessPdfPipeline:
 
         processed_table = self.extract_and_process_table(file_path)
         if not processed_table.empty:
-            processed_table['year'] = item['year']
+            processed_table['date'] = item['date']
             self.dataframes.append(processed_table)
             csv_file_name = file_path.replace('.pdf', '_table.csv')
-            csv_temp_path = os.path.join("./tmp", csv_file_name)
             
-            processed_table.to_csv(csv_temp_path, index=False)
-            gfile = drive.CreateFile({'parents': [{'id': GOOGLE_DRIVE_FOLDER_CSV_ID}], 'title': csv_file_name})
-            gfile.SetContentFile(csv_temp_path)
+            
+            processed_table.to_csv(csv_file_name, index=False)
+            gfile = drive.CreateFile({'parents': [{'id': GOOGLE_DRIVE_FOLDER_CSV_ID}], 'title': os.path.basename(csv_file_name)})
+            gfile.SetContentFile(csv_file_name)
             gfile.Upload()
             print(f"Tabla CSV subida a Google Drive: {csv_file_name}")
 
